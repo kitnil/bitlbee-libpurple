@@ -295,6 +295,8 @@ RUN if [ ${MATRIX} -eq 1 ]; then cd /tmp \
  && rm -rf /tmp/* \
  && apk del .build-dependencies; fi
 
+RUN chmod 777 /var/run
+
 EXPOSE 6667
 
 USER bitlbee
