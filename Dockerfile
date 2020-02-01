@@ -301,4 +301,6 @@ EXPOSE 6667
 
 USER bitlbee
 
+LABEL "my.docker.cmd"="docker run --publish 6667:6667 --tmpfs /var/run:uid=101,gid=101 --name bitlbee --volume /var/lib/bitlbee:/var/lib/bitlbee:Z --restart=unless-stopped --detach localhost:5000/bitlbee-libpurple:latest"
+
 CMD [ "/usr/sbin/bitlbee", "-F", "-n" ]
