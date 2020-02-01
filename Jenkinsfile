@@ -3,14 +3,15 @@ pipeline {
         label "master"
     }
     stages {
-        stage("Invoking docker build") {
+        stage("Invoking Docker") {
             steps {
-                sh "docker build -t localhost:5000/bitlbee-libpurple:latest ."
-            }
-        }
-        stage("Invoking docker push") {
-            steps {
-                sh "docker push localhost:5000/bitlbee-libpurple:latest"
+                script {
+                    docker.withRegistry('http://localhost:5000') {
+                        customImage = docker.build("bitlbee-libpurple:${env.BUILD_ID}")
+                        customImage.push()
+                        customImage.push('latest')
+                    }
+                }
             }
         }
     }
